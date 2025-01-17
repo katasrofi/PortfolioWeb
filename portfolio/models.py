@@ -1,18 +1,6 @@
 from django.db import models
 
 # Create your models here.
-
-class Profile(models.Model):
-    name = models.CharField(max_length=100)
-    bio = models.TextField()
-    email = models.EmailField()
-    phone = models.CharField(max_length=20)
-    social_links = models.URLField(blank=True, 
-                                   null=True)
-
-    def __str__(self):
-        return self.name 
-
 class Skill(models.Model):
     # Skill name 
     name = models.CharField(max_length=50)
@@ -42,8 +30,6 @@ class Skill(models.Model):
 
 class Project(models.Model):
     # Foreign Key
-    profile = models.ForeignKey(Profile, 
-                                on_delete=models.CASCADE)
     skills = models.ManyToManyField(Skill)
 
     # Project parameters
@@ -56,6 +42,24 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title 
+
+class Profile(models.Model):
+    # Foreign key
+    project = models.ManyToManyField(Project) 
+
+    # Profile parameters
+    name = models.CharField(max_length=100)
+    photo = models.ImageField(upload_to='images/',
+                              blank=True,
+                              null=True)
+    bio = models.TextField()
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    social_links = models.URLField(blank=True, 
+                                   null=True)
+
+    def __str__(self):
+        return self.name 
 
 
 class Testimonial(models.Model):
