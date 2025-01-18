@@ -34,6 +34,8 @@ class Project(models.Model):
 
     # Project parameters
     title = models.CharField(max_length=200)
+    summary = models.TextField(null=True,
+                               blank=True)
     description = models.TextField()
     image = models.ImageField(upload_to='images/')
     url = models.URLField(blank=True, 
@@ -53,6 +55,8 @@ class Profile(models.Model):
                               blank=True,
                               null=True)
     bio = models.TextField()
+    summary = models.TextField(null=True,
+                               blank=True)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
     social_links = models.URLField(blank=True, 
@@ -64,7 +68,7 @@ class Profile(models.Model):
 
 class Testimonial(models.Model):
     name = models.CharField(max_length=60)
-    feedback = models.CharField(max_length=200)
+    feedback = models.TextField()
     image = models.ImageField(upload_to='images/')
     position = models.CharField(max_length=40)
 
