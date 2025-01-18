@@ -4,8 +4,13 @@ module.exports = {
     '../templates/**/*.{html, js}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'custom-bg': '#0B021A',
+      },
+    },
   },
+  safelist: ['bg-custom-bg'],
   plugins: [],
 }
 
