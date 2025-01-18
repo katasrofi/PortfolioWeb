@@ -563,3 +563,8 @@ video {
 .block {
   display: block;
 }
+
+.bg-custom-bg {
+  --tw-bg-opacity: 1;
+  background-color: rgb(11 2 26 / var(--tw-bg-opacity, 1));
+}
