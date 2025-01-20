@@ -1,7 +1,32 @@
 from django.db import models
 
 # Create your models here.
+class Project(models.Model):
+    # Foreign Key
+#    skills = models.ForeignKey(Skill, 
+#                               on_delete=models.CASCADE,
+#                               null=True,
+#                               blank=True)
+#
+    # Project parameters
+    title = models.CharField(max_length=200)
+    summary = models.TextField(null=True,
+                               blank=True)
+    description = models.TextField()
+    image = models.ImageField(upload_to='images/')
+    url = models.URLField(blank=True, 
+                          null=True)
+    created_at = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title 
+
 class Skill(models.Model):
+    # Project 
+    project = models.ForeignKey(Project, 
+                                on_delete=models.CASCADE,
+                                null=True,
+                                blank=True)
     # Skill name 
     name = models.CharField(max_length=50)
     
@@ -28,22 +53,16 @@ class Skill(models.Model):
     def __str__(self):
         return self.name 
 
-class Project(models.Model):
-    # Foreign Key
-    skills = models.ManyToManyField(Skill)
 
-    # Project parameters
-    title = models.CharField(max_length=200)
-    summary = models.TextField(null=True,
-                               blank=True)
-    description = models.TextField()
+class Testimonial(models.Model):
+    name = models.CharField(max_length=60)
+    feedback = models.TextField()
     image = models.ImageField(upload_to='images/')
-    url = models.URLField(blank=True, 
-                          null=True)
-    created_at = models.DateField(auto_now_add=True)
+    position = models.CharField(max_length=40)
 
     def __str__(self):
-        return self.title 
+        return self.name 
+
 
 class Profile(models.Model):
     # Foreign key
@@ -61,16 +80,6 @@ class Profile(models.Model):
     phone = models.CharField(max_length=20)
     social_links = models.URLField(blank=True, 
                                    null=True)
-
-    def __str__(self):
-        return self.name 
-
-
-class Testimonial(models.Model):
-    name = models.CharField(max_length=60)
-    feedback = models.TextField()
-    image = models.ImageField(upload_to='images/')
-    position = models.CharField(max_length=40)
 
     def __str__(self):
         return self.name 
